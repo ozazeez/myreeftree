@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="reefTheme">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Builder | MyReefTree</title>
+    <link rel="stylesheet" href="/output.css">
+    <!-- Tailwind & DaisyUI CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@3.9.4/dist/full.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="/js/tailwind.config.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-reef-light min-h-screen flex flex-col">
+    <!-- Navigation -->
+    <nav class="navbar bg-reef-dark text-reef-light shadow-lg">
+        <div class="container mx-auto px-4">
+            <div class="flex-1">
+                <a href="/" class="btn btn-ghost normal-case text-xl text-reef-light">My Reef Tree</a>
+            </div>
+            <div class="flex-none">
+                <ul class="menu menu-horizontal px-1">
+                    <li><a href="/profile" class="ml-2 bg-reef-teal hover:bg-reef-coral text-white">My Builds</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flex-grow container mx-auto px-4 py-8">
+        <div class="text-center mb-12">
+            <h1 class="text-4xl font-bold text-reef-dark mb-2">Plan Your Reef</h1>
+            <p class="text-xl text-reef-teal">Track Your Growth</p>
+        </div>
+
+        <form action="/kit" method="POST">
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <% for(let component of components){ %>
+                    
+                    <div class="reef-card bg-white rounded-lg overflow-hidden">
+                        <label class="cursor-pointer block h-full p-4">
+                            <div class="flex items-start mb-4">
+                                <input type="checkbox" name="components" value="<%= component._id %>"
+                                    <%= component.checked ? 'checked' : '' %>
+                                class="checkbox checkbox-accent border-reef-teal h-5 w-5 mr-3">
+                                <h3 class="card-title text-reef-dark">
+                                    <%= component.name %>
+                                </h3>
+                            </div>
+                            <div class="component-card">
+                                <figure class="px-2">
+                                    <img src="<%= component.image %>" alt="<%= component.name %>"
+                                        class="reef-image rounded-t-lg w-full" class="build-image">
+                                </figure>
+                                <div class="card-body p-0 mt-4">
+                                    <p class="text-reef-dark">
+                                        <%= component.desc %>
+                                    </p>
+                                    <p class="text-reef-dark">
+                                        $<%= component.price %> <a href="<%= component.link %> " class="btn btn-link btn-xs bg-reef-dark hover:bg-reef-coral text-white"> Buy</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+                    <% } %>
+            </div>
+
+            <div class="text-center mt-12">
+                <button type="submit"
+                    class="btn bg-reef-teal border-reef-teal hover:bg-reef-coral text-white px-8 py-3 text-lg">
+                    <i class="fas fa-save mr-2"></i> Save Build
+                </button>
+            </div>
+        </form>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer p-10 bg-reef-sea text-reef-light">
+        <div class="container mx-auto px-4">
+            <div>
+                <span class="footer-title text-reef-light">My Reef Tree</span>
+                <a class="link link-hover text-reef-light">About us</a>
+                <a class="link link-hover text-reef-light">Contact</a>
+                <a class="link link-hover text-reef-light">Privacy policy</a>
+            </div>
+            <div>
+                <span class="footer-title text-reef-light">Resources</span>
+                <a class="link link-hover text-reef-light">Beginner's Guide</a>
+                <a class="link link-hover text-reef-light">Equipment Reviews</a>
+                <a class="link link-hover text-reef-light">Community Forum</a>
+            </div>
+            <div>
+                <span class="footer-title text-reef-light">Newsletter</span>
+                <div class="form-control w-80">
+                    <label class="label">
+                        <span class="label-text text-reef-light">Enter your email address</span>
+                    </label>
+                    <div class="relative">
+                        <input type="text" placeholder="email@myreeftree.com" class="input input-bordered w-full pr-16">
+                        <button
+                            class="btn bg-reef-teal border-reef-teal hover:bg-reef-coral text-white absolute top-0 right-0 rounded-l-none">Subscribe</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script type="text/javascript" src="/js/main.js"></script>
+</body>
+
+</html>

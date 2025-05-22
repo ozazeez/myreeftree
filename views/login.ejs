@@ -1,0 +1,95 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-theme="reefTheme">
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="Login to ReefBuilder - Build Your Perfect Aquarium">
+  <meta name="keywords" content="reef, aquarium, login, saltwater">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Reef Tree - Login</title>
+  
+  <!-- Tailwind & DaisyUI CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@3.9.4/dist/full.css" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            reef: {
+              dark: '#0A2463',
+              teal: '#2CCED2',
+              coral: '#FF6B6B',
+              light: '#F5F0E6',
+              sea: '#88C9BF'
+            }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+
+<body class="bg-reef-light min-h-screen flex flex-col items-center justify-center px-4">
+  <div class="w-full max-w-md bg-white rounded-lg shadow-xl border border-reef-sea p-8">
+    <div class="text-center mb-8">
+      <h1 class="text-3xl font-bold text-reef-dark mb-2">Welcome to My Reef Tree</h1>
+      <p class="text-reef-teal">Build your perfect aquarium</p>
+    </div>
+
+    <form method="post" action="/login" class="space-y-6">
+      <div class="form-control">
+        <label for="email" class="label">
+          <span class="label-text text-reef-dark">Email</span>
+        </label>
+        <input 
+          type="email" 
+          id="email" 
+          name="email" 
+          class="input input-bordered w-full bg-reef-light border-reef-teal focus:border-reef-coral focus:ring-reef-coral" 
+          placeholder="Enter your email address" 
+          required
+        />
+      </div>
+
+      <div class="form-control">
+        <label for="password" class="label">
+          <span class="label-text text-reef-dark">Password</span>
+        </label>
+        <input 
+          type="password" 
+          id="password" 
+          name="password" 
+          class="input input-bordered w-full bg-reef-light border-reef-teal focus:border-reef-coral focus:ring-reef-coral" 
+          placeholder="Password" 
+          required
+        />
+      </div>
+
+      <button 
+        type="submit" 
+        class="btn w-full bg-reef-teal border-reef-teal hover:bg-reef-coral text-white"
+      >
+        Login
+      </button>
+    </form>
+
+    <div class="divider text-reef-dark before:bg-reef-sea after:bg-reef-sea">OR</div>
+
+    <div class="text-center">
+      <p class="text-reef-dark mb-4">Don't have an account?</p>
+      <a 
+        href="/register" 
+        class="btn btn-outline w-full border-reef-teal text-reef-teal hover:bg-reef-teal hover:text-white hover:border-reef-teal"
+      >
+        Create Account
+      </a>
+    </div>
+  </div>
+
+  <footer class="mt-8 text-center text-reef-dark">
+    <p>© 2025 MyReefTree. All rights reserved.</p>
+  </footer>
+</body>
+</html>

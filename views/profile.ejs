@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="reefTheme">
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="Manage your aquarium builds with ReefTree">
+    <meta name="keywords" content="reef, aquarium, builds, tracker">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Builds | MyReefTree</title>
+    <!-- Tailwind & DaisyUI CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@3.9.4/dist/full.css" rel="stylesheet">
+    <script src="/js/tailwind.config.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script> 
+    <script>
+        tailwind.config = {
+          theme: {
+            extend: {
+              colors: {
+                reef: {
+                  dark: '#0A2463',
+                  teal: '#2CCED2',
+                  coral: '#FF6B6B',
+                  light: '#F5F0E6',
+                  sea: '#88C9BF'
+                }
+              }
+            }
+          }
+        }
+      </script>
+</head>
+
+<body class="bg-reef-light min-h-screen flex flex-col">
+    <!-- Navigation -->
+    <nav class="navbar bg-reef-dark text-reef-light shadow-lg">
+        <div class="container mx-auto px-4">
+            <div class="flex-1">
+                <a href="/" class="btn btn-ghost normal-case text-xl text-reef-light">My Reef Tree</a>
+            </div>
+            <div class="flex-none">
+                <ul class="menu menu-horizontal px-1">
+                    <li><a href="/build" class="text-reef-light hover:text-reef-teal">Builder</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flex-grow container mx-auto px-4 py-8">
+        <div class="overflow-x-auto bg-white rounded-lg shadow-md border border-reef-sea">
+            <table class="table w-full">
+                <thead class="bg-reef-sea text-reef-light">
+                    <tr>
+                        <th class="text-left py-4 px-6">Build</th>
+                        <th class="text-left py-4 px-6">Components</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% if (kits && kits.length > 0) { %>
+                        <% kits.forEach(kit => { %>
+                        <tr class="border-b border-reef-sea hover:bg-reef-lightest">
+                            <td class="py-4 px-6 font-medium text-reef-dark">
+                                Build 
+                            </td>
+                            <td class="py-4 px-6">
+                                <ul class="space-y-2">
+                                    <% kit.components.forEach(component => { %>
+                                        <li class="flex items-center gap-4">
+                                            <% if (component.image) { %>
+                                                <img src="<%= component.image %>" alt="<%= component.name %>" class="w-12 h-12 object-cover rounded-md border border-reef-sea" />
+                                            <% } else { %>
+                                                <div class="w-12 h-12 flex items-center justify-center bg-gray-200 text-xs text-gray-500 rounded-md border border-gray-300">
+                                                    No Image
+                                                </div>
+                                            <% } %>
+                                        
+                                            <div class="flex flex-col">
+                                                <span class="font-semibold text-reef-dark"><%= component.name %></span>
+                                                <span class="text-xs text-gray-500 font-mono">
+                                                    <%= component.desc %>
+                                                </span>
+                                            </div>
+                                        </li>
+                                        
+                                    <% }) %>
+                                </ul>
+                            </td>
+                        </tr>
+                        <% }) %>
+                    <% } else { %>
+                        <tr>
+                            <td colspan="2" class="text-center py-8 text-reef-dark">
+                                <p class="text-lg mb-4">You don't have any builds yet.</p>
+                                <a href="/build" class="btn bg-reef-teal hover:bg-reef-coral text-white">
+                                    Create Your First Build
+                                </a>
+                            </td>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+ <!-- Footer -->
+ <footer class="footer p-10 bg-reef-sea text-reef-light">
+    <div class="container mx-auto px-4">
+
+        <div>
+            <span class="footer-title text-reef-light">My Reef Tree</span> 
+            <a class="link link-hover text-reef-light">About us</a>
+            <a class="link link-hover text-reef-light">Contact</a>
+            <a class="link link-hover text-reef-light">Privacy policy</a>
+        </div> 
+        <div>
+            <span class="footer-title text-reef-light">Resources</span> 
+            <a class="link link-hover text-reef-light">Beginner's Guide</a>
+            <a class="link link-hover text-reef-light">Equipment Reviews</a>
+            <a class="link link-hover text-reef-light">Community Forum</a>
+        </div> 
+        <div>
+            <span class="footer-title text-reef-light">Newsletter</span> 
+            <div class="form-control w-80">
+                <label class="label">
+                    <span class="label-text text-reef-light">Enter your email address</span>
+                </label> 
+                <div class="relative">
+                    <input type="text" placeholder="username@site.com" class="input input-bordered w-full pr-16"> 
+                    <button class="btn bg-reef-teal border-reef-teal hover:bg-reef-coral text-white absolute top-0 right-0 rounded-l-none">Subscribe</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <script type="text/javascript" src="/js/main.js"></script>
+</body>
+</html>
