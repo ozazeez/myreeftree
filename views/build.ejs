@@ -32,19 +32,22 @@
     <main class="flex-grow container mx-auto px-4 py-8">
         <div class="text-center mb-12">
             <h1 class="text-4xl font-bold text-reef-dark mb-2">Plan Your Reef</h1>
-            <p class="text-xl text-reef-teal">Track Your Growth</p>
+            <p class="text-xl text-reef-dark"><span class="text-xl text-reef-teal"> Step 1: </span> Choose a tank size <span
+                    class="text-xl text-reef-teal"> Step 2: </span> Choose a Filter <span class="text-xl text-reef-teal">
+                    Step 3: </span> Choose a Light <span class="text-xl text-reef-teal"> Step 4: </span> Choose a Heater <span
+                    class="text-xl text-reef-teal"> Step 5: </span> ~se a Wavemaker <span class="text-xl text-reef-teal">
+                    Step 6: </span> Choose a Stand</p>
         </div>
-
         <form action="/kit" method="POST">
-            
+
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <% for(let component of components){ %>
-                    
+
                     <div class="reef-card bg-white rounded-lg overflow-hidden">
                         <label class="cursor-pointer block h-full p-4">
                             <div class="flex items-start mb-4">
                                 <input type="checkbox" name="components" value="<%= component._id %>"
-                                    <%= component.checked ? 'checked' : '' %>
+                                    <%=component.checked ? 'checked' : '' %>
                                 class="checkbox checkbox-accent border-reef-teal h-5 w-5 mr-3">
                                 <h3 class="card-title text-reef-dark">
                                     <%= component.name %>
@@ -60,7 +63,9 @@
                                         <%= component.desc %>
                                     </p>
                                     <p class="text-reef-dark">
-                                        $<%= component.price %> <a href="<%= component.link %> " class="btn btn-link btn-xs bg-reef-dark hover:bg-reef-coral text-white"> Buy</a>
+                                        $<%= component.price %> <a target="_blank" href="<%= component.link %> "
+                                                class="btn btn-link btn-xs bg-reef-dark hover:bg-reef-coral text-white">
+                                                Buy</a>
                                     </p>
                                 </div>
                             </div>

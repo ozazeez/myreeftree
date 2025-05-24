@@ -13,42 +13,45 @@ module.exports = function (app, passport, db, axios) {
     app.get('/profile', isLoggedIn, function (req, res) {
         db.collection('kit').find({ userId: req.user._id }).toArray((err, kits) => {
             if (err) return console.log(err);
-    
+
             if (!kits || kits.length === 0) {
                 return res.render('profile.ejs', {
                     user: req.user,
                     kits: []
                 });
             }
-    
+
             const allComponentIds = [];
             kits.forEach(kit => {
                 if (kit.components && kit.components.length > 0) {
                     allComponentIds.push(...kit.components);
                 }
             });
-    
-      
+
+
             const isValidObjectId = id => /^[0-9a-fA-F]{24}$/.test(id);
             const objectIds = allComponentIds
                 .filter(isValidObjectId)
                 .map(id => new ObjectId(id));
-    
+
             db.collection('components').find({
                 _id: { $in: objectIds }
             }).toArray((err, components) => {
                 if (err) return console.log(err);
-    
-               
+
+
                 const componentMap = {};
                 components.forEach(comp => {
                     componentMap[comp._id.toString()] = {
                         name: comp.name,
-                        image: comp.image 
+                        image: comp.image, 
+                        price: comp.price,
+                        desc: comp.desc,
+                        link: comp.link
                     };
                 });
-    
-        
+
+
                 const enhancedKits = kits.map(kit => ({
                     _id: kit._id,
                     name: kit.name || 'Untitled Kit',
@@ -57,11 +60,14 @@ module.exports = function (app, passport, db, axios) {
                         return {
                             id,
                             name: data.name || `Unknown Component (${id})`,
-                            image: data.image || null
+                            image: data.image || null,
+                            desc: data.desc || null,
+                            price: data.price || null,
+                            link: data.link || null
                         };
                     })
                 }));
-    
+
                 res.render('profile.ejs', {
                     user: req.user,
                     kits: enhancedKits
@@ -69,7 +75,7 @@ module.exports = function (app, passport, db, axios) {
             });
         });
     });
-    
+
 
     // LOGNOUT ==============================
     app.get('/logout', function (req, res) {
@@ -104,7 +110,7 @@ module.exports = function (app, passport, db, axios) {
             if (result.length > 0) {
 
                 kitData._id = result._id;
-              
+
             }
 
             db.collection('kit').save(kitData, (err, result) => {
